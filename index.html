@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LuxeTouch Beauty & Grooming Marketplace</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#ff6b6b" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-content">
+      <h1>LuxeTouch</h1>
+      <p>Luxury Beauty & Grooming Services</p>
+      <div class="auth-buttons">
+        <button class="cta-button" onclick="openLoginModal()">Sign In</button>
+        <button class="cta-button outline" onclick="openSignupModal()">Sign Up</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <ul>
+      <li onclick="scrollToSection('home')"><i class="fas fa-home"></i> Home</li>
+      <li onclick="scrollToSection('services')"><i class="fas fa-concierge-bell"></i> Services</li>
+      <li onclick="openBookingModal()"><i class="fas fa-calendar-check"></i> Book</li>
+      <li onclick="openProfileSection()"><i class="fas fa-user-circle"></i> Profile</li>
+    </ul>
+  </nav>
+
+  <!-- Filters Section -->
+  <section id="home" class="filters">
+    <input type="text" id="search" placeholder="Search services..." />
+    <select id="locationFilter">
+      <option value="">All Locations</option>
+      <option value="Cape Town">Cape Town</option>
+      <option value="Stellenbosch">Stellenbosch</option>
+      <option value="Somerset West">Somerset West</option>
+    </select>
+    <select id="ratingFilter">
+      <option value="">All Ratings</option>
+      <option value="5">5 Stars</option>
+      <option value="4">4 Stars & Up</option>
+      <option value="3">3 Stars & Up</option>
+    </select>
+    <button class="cta-button" onclick="applyFilters()">Apply Filters</button>
+  </section>
+
+  <!-- Services Grid Section -->
+  <section id="services" class="services-grid">
+    <!-- Dynamically loaded service cards -->
+  </section>
+
+  <!-- Supplier Details Modal -->
+  <div class="modal" id="supplierModal">
+    <div class="modal-content supplier-content">
+      <span class="close" onclick="closeModal('supplierModal')">&times;</span>
+      <div class="supplier-details">
+        <h2 id="supplierName"></h2>
+        <p id="supplierLocation"></p>
+        <p id="supplierRating"></p>
+        <h3>Available Services</h3>
+        <ul id="supplierServicesList"></ul>
+        <button class="cta-button" onclick="openBookingModalFromSupplier()">Book a Service</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Booking Modal -->
+  <div class="modal" id="bookingModal">
+    <div class="modal-content booking-content">
+      <span class="close" onclick="closeModal('bookingModal')">&times;</span>
+      <h2>Book Your Service</h2>
+      <form id="bookingForm">
+        <div class="form-group">
+          <label for="bookingService">Select Service:</label>
+          <select id="bookingService" required>
+            <!-- Populated dynamically based on selected supplier -->
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="bookingProvider">Provider:</label>
+          <input type="text" id="bookingProvider" readonly />
+        </div>
+        <div class="form-group">
+          <label for="dateTime">Date & Time:</label>
+          <input type="datetime-local" id="dateTime" required />
+        </div>
+        <div class="form-group">
+          <label for="bookingLocation">Location:</label>
+          <input type="text" id="bookingLocation" placeholder="Enter your address" required />
+        </div>
+        <button type="submit" class="cta-button">Confirm Booking</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Login Modal -->
+  <div class="modal" id="loginModal">
+    <div class="modal-content auth-content">
+      <span class="close" onclick="closeModal('loginModal')">&times;</span>
+      <h2>Sign In</h2>
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="loginEmail">Email:</label>
+          <input type="email" id="loginEmail" required />
+        </div>
+        <div class="form-group">
+          <label for="loginPassword">Password:</label>
+          <input type="password" id="loginPassword" required />
+        </div>
+        <button type="submit" class="cta-button">Login</button>
+      </form>
+      <p>Don't have an account? <span class="link" onclick="openSignupModal()">Sign Up</span></p>
+    </div>
+  </div>
+
+  <!-- Signup Modal -->
+  <div class="modal" id="signupModal">
+    <div class="modal-content auth-content">
+      <span class="close" onclick="closeModal('signupModal')">&times;</span>
+      <h2>Sign Up</h2>
+      <form id="signupForm">
+        <div class="form-group">
+          <label for="signupName">Name:</label>
+          <input type="text" id="signupName" required />
+        </div>
+        <div class="form-group">
+          <label for="signupEmail">Email:</label>
+          <input type="email" id="signupEmail" required />
+        </div>
+        <div class="form-group">
+          <label for="signupPassword">Password:</label>
+          <input type="password" id="signupPassword" required />
+        </div>
+        <div class="form-group">
+          <label for="signupRole">I am a:</label>
+          <select id="signupRole" required>
+            <option value="user">User</option>
+            <option value="provider">Provider</option>
+          </select>
+        </div>
+        <button type="submit" class="cta-button">Sign Up</button>
+      </form>
+      <p>Already have an account? <span class="link" onclick="openLoginModal()">Sign In</span></p>
+    </div>
+  </div>
+
+  <!-- Profile Section -->
+  <section id="profile" class="profile-section hidden">
+    <div class="profile-header">
+      <h2>My Profile</h2>
+      <button class="cta-button outline" onclick="logout()">Logout</button>
+    </div>
+    <div class="profile-content">
+      <div class="profile-info">
+        <p><strong>Name:</strong> <span id="profileName"></span></p>
+        <p><strong>Email:</strong> <span id="profileEmail"></span></p>
+        <p><strong>Role:</strong> <span id="profileRole"></span></p>
+      </div>
+      <div class="profile-bookings">
+        <h3>My Bookings</h3>
+        <ul id="bookingList">
+          <!-- List of bookings will be populated here -->
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <script src="scripts.js"></script>
+</body>
+</html>
