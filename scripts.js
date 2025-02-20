@@ -3,7 +3,7 @@ const providers = [
   {
     name: "Glamour Studio",
     location: "Cape Town",
-    image: "images/glamour_studio.jpg", // Update with actual image path
+    image: "https://i.postimg.cc/tgPwJmKz/women-wearing-beautiful-nail-polish.jpg", // Update with actual image path
     services: [
       { name: "Mobile Manicure", duration: "60min", price: 350 },
       { name: "Express Pedicure", duration: "45min", price: 300 }
@@ -13,7 +13,7 @@ const providers = [
   {
     name: "Gentleman's Grooming",
     location: "Stellenbosch",
-    image: "images/gentlemans_grooming.jpg", // Update with actual image path
+    image: "https://i.postimg.cc/WbWQHZm0/latino-hair-salon-owner-taking-care-client.jpg", // Update with actual image path
     services: [
       { name: "Beard Trim", duration: "45min", price: 200 },
       { name: "Hot Towel Shave", duration: "30min", price: 150 }
@@ -23,7 +23,7 @@ const providers = [
   {
     name: "Skin Bliss",
     location: "Somerset West",
-    image: "images/skin_bliss.jpg", // Update with actual image path
+    image: "https://i.postimg.cc/g2xfF04Q/indoor-image-beauty-salon-one-woman-making-pedicure-other-one-worker-beauty-industry-nail-service-de.jpg", // Update with actual image path
     services: [
       { name: "Deep Cleansing Facial", duration: "90min", price: 500 }
     ],
